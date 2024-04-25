@@ -28,7 +28,11 @@ function mostrarDatosClima(data){
     const pais = data.sys.country
     const ciudadNombre = data.name + ` - ${pais}`;
     const temperatura = data.main.temp;
+    const tempMax = data.main.temp_max;
+    const tempMin = data.main.temp_min;
     const humedad = data.main.humidity;
+    const presion = data.main.pressure;
+    
     const descripcion = data.weather[0].description;
     const icono = data.weather[0].icon;
     
@@ -39,8 +43,14 @@ function mostrarDatosClima(data){
     const temperaturaInfo = document.createElement('p');
     temperaturaInfo.textContent = `Temperatura: ${Math.floor(temperatura - difKelvin)}°C`;
     
+    const maxMin = document.createElement('p');
+    maxMin.textContent = ` max: ${Math.floor(tempMax - difKelvin)}°C - min: ${Math.floor(tempMin - difKelvin)}°C`
+
     const humedadInfo = document.createElement('p');
     humedadInfo.textContent = `Humedad: ${humedad}%`;
+    
+    const presionInfo = document.createElement('p');
+    presionInfo.textContent = `Presion: ${presion}hp`;
     
     const iconoInfo = document.createElement('img');
     iconoInfo.src = `https://openweathermap.org/img/wn/${icono}.png`;
@@ -48,9 +58,12 @@ function mostrarDatosClima(data){
     const descripcionInfo = document.createElement('p');
     descripcionInfo.textContent = `Descripción: ${descripcion}`;
     
+    // Agregar Elementos al DOM
     divDatosClima.appendChild(ciudadTitulo);
     divDatosClima.appendChild(temperaturaInfo);
+    divDatosClima.appendChild(maxMin);
     divDatosClima.appendChild(humedadInfo);
+    divDatosClima.appendChild(presionInfo);
     divDatosClima.appendChild(iconoInfo);
     divDatosClima.appendChild(descripcionInfo);
 
